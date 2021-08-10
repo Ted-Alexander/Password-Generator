@@ -12,17 +12,19 @@ useNumbers = false;
 useSymbols = false;
 lastUsed = "Z" // prevents repeats
 generated = []; //password goes here
+howLong = 0;
 
 
 function generatePassword(){
-    var howLong = prompt("How many characters would you like your password to contain?");
+    howLong = parseInt(prompt("How many characters would you like your password to contain?"));
       while (howLong < 8 || howLong > 127){
         alert("Password length must be between 8-128 characters Try again");
-        var howLong = prompt(
+        howLong = parseInt(prompt(
           "How many characters would you like your password to contain?"
-        );
+        ));
       }
-     
+      console.log("How long:", howLong)
+    
       alert(`Your password will have ${howLong} characters`);
       
       useSymbols = confirm(
@@ -37,47 +39,53 @@ function generatePassword(){
       useUpper = confirm(
         "Click OK to confirm if you would like to include uppercase characters"
       );
-
-      function pickCharacters() {
-        if (useLower = true && generated.length < howLong && lastUsed != "L"){
-          pickLower = Math.floor(Math.random() * lowerCase.length); //generate random number between 1-26
-          generated.push(lowerCase[pickLower]) // to be in generated array
-          lastUsed = "L" //prevent repeats
-        }
-        else if (useUpper = true && generated.length < howLong && lastUsed != "U"){
-          pickUpper = Math.floor(Math.random() * upperCase.length);  //generate random number between 1-26
-          generated.push(upperCase[pickUpper])// to be in generated array
-          lastUsed = "U"
-        }
-        else if (useNumbers = true && generated.length < howLong && lastUsed != "N"){
-          pickNumber = Math.floor(Math.random() * lowerCase.length);  //generate random number between 1-10
-          generated.push(numbers[pickNumber]) // to be in generated array
-          lastUsed = "N"
-        }
-        else if (useSymbols = true && generated.length < howLong && lastUsed != "S"){
-          pickSymbol = Math.floor(Math.random() * lowerCase.length);   //generate random number between 1-29
-          generated.push(symbols[pickSymbol]) // to be in generated array
-          lastUsed = "S"
+      
+        pickCharacters();
+  }
     
-        }
-        longEnough();
+
+function pickCharacters() {
+  console.log(howLong)
+  if (useLower = true && generated.length < howLong && lastUsed != "L"){
+    pickLower = Math.floor(Math.random() * lowerCase.length); //generate random number between 1-26
+    generated.push(lowerCase[pickLower]) // to be in generated array
+    lastUsed = "L" //prevent repeats
+    console.log(generated.length)
+  }
+  else if (useUpper = true && generated.length < howLong && lastUsed != "U"){
+    pickUpper = Math.floor(Math.random() * upperCase.length);  //generate random number between 1-26
+    generated.push(upperCase[pickUpper])// to be in generated array
+    lastUsed = "U"
+    console.log(generated.length)
+  }
+  else if (useNumbers = true && generated.length < howLong && lastUsed != "N"){
+    pickNumber = Math.floor(Math.random() * lowerCase.length);  //generate random number between 1-10
+    generated.push(numbers[pickNumber]) // to be in generated array
+    lastUsed = "N"
+    console.log(generated.length)
+  }
+  else if (useSymbols = true && generated.length < howLong && lastUsed != "S"){
+    pickSymbol = Math.floor(Math.random() * lowerCase.length);   //generate random number between 1-29
+    generated.push(symbols[pickSymbol]) // to be in generated array
+    lastUsed = "S"
+    console.log(generated.length)
+
     }
-        function longEnough(){
-          if (generated.length < howLong) {
-            pickCharacters();
-        }else {writePassword();
-}
+    longEnough();
+  }
 
-
-
+function longEnough(){
+  if (generated.length < howLong) {
+    pickCharacters();
+}else {return generated.join();
+}}
 
 // function longEnough(){
 //   if (generated.length < howLong) {
 //     pickCharacters();
 // }else {writePassword();
 
-};
-}
+
 
 
 // function pickCharacters() {
